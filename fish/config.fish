@@ -1,0 +1,1 @@
+set PATH /usr/local/SML/bin/ $PATH
