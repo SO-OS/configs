@@ -140,3 +140,6 @@ The result is like this:
 
 ;; open eshell
 (global-set-key (kbd "<f3>") 'eshell)
+
+;; easy-kill
+(global-set-key [remap kill-ring-save] 'easy-kill)
