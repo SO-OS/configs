@@ -1,4 +1,20 @@
-;; when use GNOME
+;; BINDING
+;; Naming current buffer
+(global-set-key (kbd "<f1>") 'rename-buffer)
+;; Shortcut for eshell
+(global-set-key (kbd "<f3>") 'eshell)
+;; F11 = Full Screen
+(defun toggle-fullscreen (&optional f)
+  (interactive)
+  (let ((current-value (frame-parameter nil 'fullscreen)))
+    (set-frame-parameter nil 'fullscreen
+      (if (equal 'fullboth current-value)
+        (if (boundp 'old-fullscreen) old-fullscreen nil)
+        (progn (setq old-fullscreen current-value)
+          'fullboth)))))
+(global-set-key [f11] 'toggle-fullscreen)
+
+;; When use GNOME
 (setq-default font-use-system-font t)
 
 ;; Use spaces instead of tabs
@@ -15,28 +31,17 @@
 (setq-default py-indent-offset 4)
 (setq-default python-indent 4)
 
-;; display battery percent
+;; Display battery percent
 (display-battery-mode t)
 
-;; F11 = Full Screen
-(defun toggle-fullscreen (&optional f)
-  (interactive)
-  (let ((current-value (frame-parameter nil 'fullscreen)))
-    (set-frame-parameter nil 'fullscreen
-      (if (equal 'fullboth current-value)
-        (if (boundp 'old-fullscreen) old-fullscreen nil)
-        (progn (setq old-fullscreen current-value)
-          'fullboth)))))
-(global-set-key [f11] 'toggle-fullscreen)
-
-;; display time and date in status bar
+;; Display time and date in status bar
 (setq display-time-day-and-date t
     display-time-24hr-format t)
 
-;; color theme
-(load-theme 'deeper-blue)
+;; Colortheme
+;; (load-theme 'deeper-blue)
 
-;; automatically show completion
+;; Automatically show completion
 (icomplete-mode 1)
 
 ;; cscope support
@@ -57,7 +62,7 @@
 	     (c-subword-mode 1)
 	     (smartparens-mode 1)))
 
-;; command to add a cool box (* from pluskid *)
+;; Command to add a cool box (* from pluskid *)
 (defun kid-cool-box (title begin end)
   "Wrap the region with a cool box.
 The result is like this:
@@ -83,7 +88,6 @@ The result is like this:
     (unless (looking-back "^")
       (insert "\n"))
     (insert "`----------\n")))
-
 
 ;; move mouse away when cursor around
 (mouse-avoidance-mode 'jump)
@@ -111,35 +115,35 @@ The result is like this:
 ;;"C-h d transient" for more info
 (setq transient-mark-mode t)
 
-;; show the line number
+;; Show the line number
 ;;(global-linum-mode t)
 
-;; no toolbar
+;; No toolbar
 (tool-bar-mode -1)
 
-;; no menubar
+;; No menubar
 (menu-bar-mode -1)
 
 ;;; Always do syntax highlighting
 (global-font-lock-mode 1)
 
-;; visible-bell for beep
+;; Visible-bell for beep
 (setq visible-bell t)
 
-;; show matching parens
+;; Show matching parens
 (show-paren-mode t)
 
 ;; Trailing whitespace is unnecessary
 (add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))
 
-;;; this is the binary name of my scheme
+;; This is the binary name of my scheme
 (setq scheme-program-name "guile")
 
-;; naming current buffer
-(global-set-key (kbd "<f1>") 'rename-buffer)
-
-;; open eshell
-(global-set-key (kbd "<f3>") 'eshell)
 
 ;; easy-kill
-(global-set-key [remap kill-ring-save] 'easy-kill)
+;; (global-set-key [remap kill-ring-save] 'easy-kill)
+
+;; For Haskell
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
